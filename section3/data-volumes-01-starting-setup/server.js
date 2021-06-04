@@ -37,10 +37,10 @@ app.post('/create', async (req, res) => {
       res.redirect('/exists');
     } else {
       await fs.copyFile(tempFilePath, finalFilePath);
-      await finalFilePath.unlink(tempFilePath);
+      await fs.unlink(tempFilePath);
       res.redirect('/');
     }
   });
 });
 
-app.listen(80);
+app.listen(process.env.PORT);

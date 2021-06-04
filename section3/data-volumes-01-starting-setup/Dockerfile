@@ -11,6 +11,8 @@ COPY . .
 # 'app' is WORKDIR and 'feedback' is a folder from serve.js code
 # VOLUME [ "/app/feedback" ]
 
-EXPOSE 80
+ENV PORT 8080
+
+EXPOSE 8080
 
 CMD ["node","server.js"]
