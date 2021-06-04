@@ -9,7 +9,7 @@ RUN npm install
 COPY . .
 
 # 'app' is WORKDIR and 'feedback' is a folder from serve.js code
-VOLUME [ "/app/feedback" ]
+# VOLUME [ "/app/feedback" ]
 
 EXPOSE 80
 
