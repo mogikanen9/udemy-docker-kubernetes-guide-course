@@ -9,12 +9,14 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const apiUrl = 'http://multi-backend/goals';
+
   useEffect(function () {
     async function fetchData() {
       setIsLoading(true);
 
       try {
-        const response = await fetch('http://localhost/goals');
+        const response = await fetch(apiUrl);
 
         const resData = await response.json();
 
@@ -39,7 +41,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/goals', {
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: JSON.stringify({
           text: goalText,
@@ -78,7 +80,7 @@ function App() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost/goals/' + goalId, {
+      const response = await fetch(apiUrl + goalId, {
         method: 'DELETE',
       });
 
