@@ -9,7 +9,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const apiUrl = 'http://multi-backend/goals';
+  const apiUrl = 'http://localhost/goals';
 
   useEffect(function () {
     async function fetchData() {
