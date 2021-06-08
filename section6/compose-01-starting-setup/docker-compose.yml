@@ -3,24 +3,36 @@ services:
     mongodb:
         image: 'mongo' 
         volumes: 
-             - data:/data/db
-        environment: 
-             - MONGO_INITDB_ROOT_USERNAME=max
-             - MONGO_INITDB_ROOT_PASSWORD=secret      
+            - data:/data/db
+        #environment: 
+        #    - MONGO_INITDB_ROOT_USERNAME=max
+        #    - MONGO_INITDB_ROOT_PASSWORD=secret      
+        env_file: 
+            - ./env/mongo.env
     backend:
         build: 
             context: ./backend
             dockerfile: Dockerfile
         ports:
             - '80:80'
-        environment: 
-            - MONGODB_USERNAME=max
-            - MONGODB_PASSWORD=secret      
-    #frontend:   
-    #    build: 
-    #        context: ./frontend
-    #        dockerfile: Dockerfile
-    #    ports:
-    #        - "3000:3000"
+        #environment: 
+        #    - MONGODB_USERNAME=max
+        #    - MONGODB_PASSWORD=secret
+        env_file:
+            - ./env/backend.env
+        volumes: 
+            - logs:/app/logs
+        depends_on: 
+            - mongodb              
+    frontend:   
+        build: ./frontend
+        ports:
+            - "3000:3000"
+        stdin_open: true
+        tty: true
+        depends_on: 
+            - backend    
+
 volumes: 
     data:
+    logs:    
